@@ -61,34 +61,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         
         
-        /*let faceRequest = VNDetectFaceRectanglesRequest { (req, err) in
-            
-            if  let err = err {
-                print("Failed to detect face \(err)")
-                return
-            }
-            
-            
-            req.results?.forEach({ (res) in
-                
-                guard let faceObservation = res as? VNFaceObservation else {return}
-                
-                let x = self.view.frame.width * faceObservation.boundingBox.origin.x
-                let height = self.view.frame.height * faceObservation.boundingBox.height
-                let y = self.view.frame.height * (1 - faceObservation.boundingBox.origin.y) - height
-                let width = self.view.frame.width * faceObservation.boundingBox.width
-                
-                let borderView = UIView ()
-                borderView.backgroundColor = .red
-                borderView.alpha = 0.5
-                borderView.frame = CGRect.init(x: 0, y: 0, width: 100, height: 100)
-                self.view.addSubview(borderView)
-                
-                self.previewLayer?.addSublayer(borderView.layer)
-                print(faceObservation.boundingBox)
-                
-            })
-        }*/
+       
         
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
         
