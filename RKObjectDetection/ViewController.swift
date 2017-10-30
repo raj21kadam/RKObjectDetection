@@ -8,7 +8,8 @@
 
 import UIKit
 import Vision
-import AVKit
+import AVFoundation
+//import AVKit
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
