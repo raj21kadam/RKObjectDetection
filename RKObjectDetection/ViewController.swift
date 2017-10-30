@@ -22,6 +22,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // set up the camera session
         
+       self.addCameraSessions()
+        
+
+    }
+    
+    
+    func addCameraSessions(){
+        
         let captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo
         
@@ -31,7 +39,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         captureSession.addInput(captureInput)
         captureSession.startRunning()
         
-     previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         view.layer.addSublayer(previewLayer!)
         previewLayer!.frame = self.view.frame
         
@@ -39,8 +47,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         captureDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "video"))
         captureSession.addOutput(captureDataOutput)
-        
-
     }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
