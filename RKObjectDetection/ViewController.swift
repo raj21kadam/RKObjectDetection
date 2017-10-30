@@ -53,11 +53,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
         
+        self.checkObject(pixelBuffer: pixelBuffer)
+        
+    }
+    
+    func checkObject(pixelBuffer: CVPixelBuffer){
+        
         guard let myMLModel = try? VNCoreMLModel(for: Resnet50().model) else {return}
         
         let request = VNCoreMLRequest(model: myMLModel) { (finishedRequest, error) in
-            
-//            print(finishedRequest.results?.capacity)
             
             guard let results = finishedRequest.results as? [VNClassificationObservation] else {return}
             
@@ -66,12 +70,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             print("\(firstObservation.confidence)")
         }
         
-        
-        
-       
-        
         try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
-        
     }
     
     override func didReceiveMemoryWarning() {
