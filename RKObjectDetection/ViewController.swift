@@ -13,6 +13,8 @@ import AVFoundation
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var confidenceLabel: UILabel!
     var previewLayer:AVCaptureVideoPreviewLayer?
     
     override func viewDidLoad() {
@@ -41,7 +43,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         view.layer.addSublayer(previewLayer!)
-        previewLayer!.frame = self.view.frame
+        var newFrame = self.view.frame
+        let yPos = confidenceLabel.frame.origin.y + 30
+        newFrame.origin.y = yPos
+        newFrame.size.height = newFrame.size.height - yPos
+        previewLayer!.frame = newFrame
         
         let captureDataOutput = AVCaptureVideoDataOutput()
         
